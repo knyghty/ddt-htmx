@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<title>Hello</title>
+
+<body hx-boost="true">
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <script src="https://unpkg.com/htmx.org@1.8.2"></script>
+    <!-- Remove this script to break DDT -->
+    <!-- Note this is also broken because it adds too many event handlers (I think?) -->
+    <script>
+        if (typeof htmx !== "undefined") {
+            htmx.on("htmx:afterSettle", function(detail) {
+                if (detail.target instanceof HTMLBodyElement) {
+                    djdt.init();
+                }
+            });
+        }
+    </script>
+</body>
+</html>
